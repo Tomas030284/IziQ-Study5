@@ -16,7 +16,7 @@ const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getAllData = async () => {
-    let allUsers = (await axios.get("http://localhost:3000/api/users")).data;
+    let allUsers = (await axios.get(`${process.env.CLIENTE_URL}/api/users`)).data;
     return allUsers;
   };
 

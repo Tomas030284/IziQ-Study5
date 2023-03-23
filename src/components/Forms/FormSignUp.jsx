@@ -63,7 +63,7 @@ function FormSignUp() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: "http://localhost:3000/home",
+        redirectTo: `${process.env.CLIENTE_URL}/home`,
       },
     });
     setRedirect(true);
@@ -74,7 +74,7 @@ function FormSignUp() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "facebook",
       options: {
-        redirectTo: "http://localhost:3000/home",
+        redirectTo: `${process.env.CLIENTE_URL}/home`,
       },
     });
     setRedirect(true);

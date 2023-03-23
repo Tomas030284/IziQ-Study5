@@ -24,7 +24,7 @@ const ProfileBuckets = () => {
 
     if (data) {
       console.log("este es data ", data);
-      await axios.put("http://localhost:3000/api/users", {
+      await axios.put(`${process.env.CLIENTE_URL}/api/users`, {
         users_uuid: userID,
         image: data.path,
       });

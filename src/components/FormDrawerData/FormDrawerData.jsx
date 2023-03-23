@@ -24,7 +24,8 @@ function FormDrawerData() {
   });
 
   useEffect(async () => {
-    let allUsers = (await axios.get("http://localhost:3000/api/users")).data;
+    let allUsers = (await axios.get(`${process.env.CLIENTE_URL}/api/users`))
+      .data;
     let user = (await allUsers.filter((u) => u.users_uuid == uuid))[0];
 
     await setInfo(user);
@@ -47,7 +48,7 @@ function FormDrawerData() {
   const handleUpdate = async (event) => {
     event.preventDefault();
 
-    await axios.put("http://localhost:3000/api/users", {
+    await axios.put(`${process.env.CLIENTE_URL}/api/users`, {
       users_uuid: uuid,
       name: newData.name,
       lastname: newData.lastname,

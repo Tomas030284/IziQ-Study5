@@ -88,7 +88,7 @@ const DeckForm = ({
   }
 
   async function handleOnSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
     setSubmitted(true);
     await onCreateFn(deckFormData);
     await onCloseFn();
@@ -245,7 +245,7 @@ async function getUserID() {
 
 async function getCategories() {
   const response = await axios
-    .get(`http://${HOST}/api/categories`)
+    .get(`${process.env.CLIENTE_URL}/api/categories`)
     .then((res) => res.data);
 
   return response;
@@ -254,13 +254,14 @@ async function getCategories() {
 async function getSubcategoriesByCategoryId(categoryId) {
   if (!categoryId) {
     const response = await axios
-      .get(`http://${HOST}/api/subcategories/`)
+      .get(`${process.env.CLIENTE_URL}/api/subcategories/`)
       .then((res) => res.data);
 
     return response;
   } else {
     const response = await axios
-      .get(`http://${HOST}/api/subcategories/category/${categoryId}`)
+      .get(`${process.env.CLIENTE_URL}/api/subcategories/category/${categoryId}`
+      )
       .then((res) => res.data);
 
     return response;

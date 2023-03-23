@@ -24,7 +24,8 @@ const OptionsBar = ({ logged = false, avatarImage }) => {
   useEffect(async () => {
     let uuid = await SupaHelpers.get.userId();
     setMyUuid(uuid);
-    let allUsers = (await axios.get("http://localhost:3000/api/users")).data;
+    let allUsers = (await axios.get(`${process.env.CLIENTE_URL}/api/users`))
+      .data;
     let userData = (await allUsers?.filter((u) => u.users_uuid == uuid))[0];
     //Accedemos a ese dato por medio de un metodo en supaHelpers
     let user = await SupaHelpers.get.userNameFull();

@@ -26,7 +26,7 @@ function Decks() {
     error: deck_error,
   } = ReactQuery.useQuery([QK_DECK], async () => {
     const response = await axios
-      .get(`http://${HOST}/api/cards/deck-id/${deck_id}`)
+      .get(`${process.env.CLIENTE_URL}/api/cards/deck-id/${deck_id}`)
       .then((res) => res.data);
 
     return response;
@@ -51,7 +51,7 @@ function Decks() {
 
   const mutationPost = ReactQuery.useMutation(
     (cardData) => {
-      return axios.post(`http://${HOST}/api/cards`, cardData);
+      return axios.post(`${process.env.CLIENTE_URL}/api/cards`, cardData);
     },
     {
       onSuccess: () => {
@@ -63,7 +63,7 @@ function Decks() {
 
   const mutationEdit = ReactQuery.useMutation(
     (cardData) => {
-      return axios.put(`http://${HOST}/api/cards`, cardData);
+      return axios.put(`${process.env.CLIENTE_URL}/api/cards`, cardData);
     },
     {
       onSuccess: () => {
@@ -75,7 +75,9 @@ function Decks() {
 
   const mutationDelete = ReactQuery.useMutation(
     (cardData) => {
-      return axios.delete(`http://${HOST}/api/cards`, { data: cardData });
+      return axios.delete(`${process.env.CLIENTE_URL}/api/cards`, {
+        data: cardData,
+      });
     },
     {
       onSuccess: () => {
@@ -176,7 +178,7 @@ export async function getServerSideProps(context) {
 
   await queryClient.prefetchQuery([QK_DECK], async () => {
     const response = await axios
-      .get(`http://${HOST}/api/cards/deck-id/${deck_id}`)
+      .get(`${process.env.CLIENTE_URL}/api/cards/deck-id/${deck_id}`)
       .then((res) => res.data);
 
     return response;
@@ -210,7 +212,7 @@ function handleMutationError(mutation) {
 
 async function getDeckOwnerId(deck_id) {
   const response = await axios
-    .get(`http://${HOST}/api/decks/id/${deck_id}`)
+    .get(`${process.env.CLIENTE_URL}/api/decks/id/${deck_id}`)
     .then((res) => res.data.at(0).user_id);
 
   return response;
